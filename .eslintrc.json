@@ -23,5 +23,6 @@
         ],
         "react/react-in-jsx-scope": "off",
         "no-unused-vars": "warn"
-    }
+    },
+    "ignorePatterns": ["src/components/ui/**/*.{js,ts,jsx,tsx,mdx}"]
 }
