@@ -1,9 +1,9 @@
-import AnswerIcon from '@/assets/icons/answer.png';
-import CheckedIcon from '@/assets/icons/checked.png';
-import EfficiencyIcon from '@/assets/icons/efficiency.png';
-import HDIcon from '@/assets/icons/hd.png';
-import MobileFriendlyIcon from '@/assets/icons/mobile-friendly.png';
-import VideoIcon from '@/assets/icons/video.png';
+import AnswerIcon from '@/assets/icons/answer.avif';
+import CheckedIcon from '@/assets/icons/checked.avif';
+import EfficiencyIcon from '@/assets/icons/efficiency.avif';
+import HDIcon from '@/assets/icons/hd.avif';
+import MobileFriendlyIcon from '@/assets/icons/mobile-friendly.avif';
+import VideoIcon from '@/assets/icons/video.avif';
 import { StaticImageData } from 'next/image';
 
 interface Feature {

@@ -62,6 +62,7 @@ export function InputForm() {
                     onClick={() => setInputUrl('')}
                 >
                     <X className="size-5" />
+                    <span className="sr-only">Clear input</span>
                 </Button>
             </div>
             <Button type="submit" className="min-w-[69px]" onClick={handleSubmit} disabled={isSubmitDisabled}>

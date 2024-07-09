@@ -24,7 +24,7 @@ Unmarked Tik is a tool that allows you to download TikTok videos and slideshows 
 To install Unmarked Tik, you can clone the repository and install the dependencies using npm or yarn.
 
 ```bash
-git clone https://github.com/your-username/unmarked-tik.git
+git clone https://github.com/pyyupsk/unmarked-tik.git
 cd unmarked-tik
 npm install
 # or
