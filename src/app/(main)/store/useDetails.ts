@@ -7,9 +7,13 @@ type State = {
     setDetails: (details: Details) => void;
 };
 
+/**
+ * Store for details related to the TikTok video or slideshow.
+ * @public
+ */
 export const useDetails = create<State>((set) => ({
     details: {
-        type: 'video',
+        type: 'video' as 'video' | 'slideshow',
         thumbnail: '',
         title: '',
         author: {
@@ -18,7 +22,13 @@ export const useDetails = create<State>((set) => ({
             nickname: '',
             avatar: '',
         },
-        downloads: [],
+        downloads: [] as string[],
     },
-    setDetails: (details) => set({ details }),
+    /**
+     * Update the details in the store.
+     * @public
+     * @param details The new details to set.
+     * @returns void
+     */
+    setDetails: (details: Details) => set({ details }),
 }));

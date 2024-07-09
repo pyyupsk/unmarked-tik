@@ -4,7 +4,12 @@ import { ThemeToggle } from './toggle-theme';
 import { buttonVariants } from './ui/button';
 import { Separator } from './ui/separator';
 
-export function Header() {
+/**
+ * Renders the header component.
+ *
+ * @returns {JSX.Element} The rendered header component.
+ */
+export function Header(): JSX.Element {
     return (
         <header className="sticky top-0 z-50 h-16 border-b bg-background/90 backdrop-blur">
             <nav className="container flex h-full items-center justify-between">

@@ -1,12 +1,16 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { faqs } from '@/data/faqs';
-import { features } from '@/data/features';
+import { FAQ, faqs } from '@/data/faqs';
+import { Feature, features } from '@/data/features';
 import Image from 'next/image';
 import { InputForm } from './components/input-form';
 import { ResultCard } from './components/result-card';
 
-export default function Home() {
+/**
+ * Renders the main page of the application.
+ * @returns The main page JSX element.
+ */
+export default function Home(): JSX.Element {
     return (
         <main className="container space-y-10 flex flex-col items-center py-20">
             <div className="text-center space-y-2">
@@ -21,7 +25,7 @@ export default function Home() {
             <section className="w-full flex flex-col items-center space-y-6">
                 <h2 className="text-3xl font-semibold leading-none tracking-tight text-center">Key Features</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                    {features.map((feature, index) => (
+                    {features.map((feature: Feature, index: number) => (
                         <Card key={index}>
                             <CardHeader className="flex items-center space-y-4">
                                 <Image
@@ -45,7 +49,7 @@ export default function Home() {
                     Frequently Asked Questions
                 </h2>
                 <Accordion type="multiple" defaultValue={faqs.map((_, index) => `item-${index}`)} className="w-full">
-                    {faqs.map((faq, index) => (
+                    {faqs.map((faq: FAQ, index: number) => (
                         <AccordionItem key={index} value={`item-${index}`}>
                             <AccordionTrigger>{faq.question}</AccordionTrigger>
                             <AccordionContent>{faq.answer}</AccordionContent>

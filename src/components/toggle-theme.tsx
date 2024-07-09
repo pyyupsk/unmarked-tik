@@ -7,6 +7,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
@@ -15,9 +16,14 @@ interface themeOption {
     value: string;
 }
 
-export function ThemeToggle() {
+/**
+ * Toggle component for changing the theme.
+ *
+ * @returns {JSX.Element} The ThemeToggle component.
+ */
+export function ThemeToggle(): JSX.Element {
     const { setTheme, theme } = useTheme();
-    const currentTheme = theme || 'light';
+    const currentTheme: string = theme || 'light';
 
     const themeOptions: themeOption[] = [
         { name: 'Light', value: 'light' },
@@ -25,12 +31,21 @@ export function ThemeToggle() {
         { name: 'System', value: 'system' },
     ];
 
+    /**
+     * Handles the theme option selection.
+     *
+     * @param {string} value - The selected theme value.
+     */
+    const handleThemeOption = (value: string): void => {
+        setTheme(value);
+    };
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
-                    <Sun className={`size-5 ${currentTheme !== 'light' ? 'hidden' : ''}`} />
-                    <Moon className={`size-5 ${currentTheme !== 'dark' ? 'hidden' : ''}`} />
+                    <Sun className={cn('size-5', currentTheme !== 'light' ? 'hidden' : '')} />
+                    <Moon className={cn('size-5', currentTheme !== 'dark' ? 'hidden' : '')} />
                     <span className="sr-only">Toggle theme</span>
                 </Button>
             </DropdownMenuTrigger>
@@ -38,7 +53,7 @@ export function ThemeToggle() {
                 {themeOptions.map((option) => (
                     <DropdownMenuItem
                         key={option.value}
-                        onClick={() => setTheme(option.value)}
+                        onClick={() => handleThemeOption(option.value)}
                         className={`${option.value === currentTheme ? 'bg-accent' : ''}`}
                     >
                         {option.name}

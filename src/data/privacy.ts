@@ -1,4 +1,4 @@
-interface Privacy {
+export interface Privacy {
     title: string;
     description: string;
     list?: string[];

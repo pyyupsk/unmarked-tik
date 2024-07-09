@@ -7,6 +7,12 @@ type CommonMetaData = {
     description: string;
 };
 
+/**
+ * Generates common metadata for the website.
+ * @param title - The title of the page.
+ * @param description - The description of the page.
+ * @returns The metadata for the page.
+ */
 export const commonMetaData = ({ title, description }: CommonMetaData): Metadata => ({
     title,
     description,

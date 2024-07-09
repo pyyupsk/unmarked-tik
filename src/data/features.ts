@@ -6,7 +6,7 @@ import MobileFriendlyIcon from '@/assets/icons/mobile-friendly.avif';
 import VideoIcon from '@/assets/icons/video.avif';
 import { StaticImageData } from 'next/image';
 
-interface Feature {
+export interface Feature {
     title: string;
     description: string;
     icon: StaticImageData;

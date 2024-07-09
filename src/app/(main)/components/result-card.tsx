@@ -12,11 +12,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export function ResultCard() {
+/**
+ * Renders a result card component with a carousel, author, and download button.
+ *
+ * @returns {React.ReactElement | null} - The result card component or null if there are no downloads.
+ */
+export function ResultCard(): React.ReactElement | null {
     const { toast } = useToast();
     const { details } = useDetails();
     const { isLoading, setIsLoading } = useLoading();
-    const [percent, setPercent] = useState(0);
+    const [percent, setPercent] = useState<number>(0);
 
     if (details.downloads.length === 0) {
         return null;
@@ -25,7 +30,7 @@ export function ResultCard() {
     const { title, author, thumbnail, downloads, type } = details;
     const isSlideshow = type === 'slideshow';
 
-    const handleDownload = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleDownload = async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
         event.preventDefault();
         setIsLoading(true);
 
@@ -42,19 +47,19 @@ export function ResultCard() {
             }
 
             await Promise.all(
-                downloads.map(async (url, index) => {
+                downloads.map(async (url: string, index: number) => {
                     const response = await fetch(url);
 
                     if (!response.ok) {
                         throw new Error('Failed to fetch image');
                     }
 
-                    const contentLength = +response.headers.get('Content-Length')!;
-                    const contentType = response.headers.get('Content-Type')!;
+                    const contentLength: number = +response.headers.get('Content-Length')!;
+                    const contentType: string = response.headers.get('Content-Type')!;
                     const chunks: Uint8Array[] = [];
 
                     const reader = response.body!.getReader();
-                    let receivedLength = 0;
+                    let receivedLength: number = 0;
 
                     while (receivedLength < contentLength) {
                         const { done, value } = await reader.read();
@@ -64,15 +69,15 @@ export function ResultCard() {
                         setPercent((receivedLength / contentLength) * 100);
                     }
 
-                    const blob = new Blob(chunks);
-                    const filename = `${title}_${index + 1}.${contentType.split('/')[1]}`;
+                    const blob: Blob = new Blob(chunks);
+                    const filename: string = `${title}_${index + 1}.${contentType.split('/')[1]}`;
                     folder.file(filename, blob);
                 })
             );
 
-            const zipFile = await zip.generateAsync({ type: 'blob' });
-            const filename = `unmarked_tik_${new Date().toISOString()}.zip`;
-            const downloadLink = document.createElement('a');
+            const zipFile: Blob = await zip.generateAsync({ type: 'blob' });
+            const filename: string = `unmarked_tik_${new Date().toISOString()}.zip`;
+            const downloadLink: HTMLAnchorElement = document.createElement('a');
 
             downloadLink.href = URL.createObjectURL(zipFile);
             downloadLink.download = filename;
@@ -94,7 +99,7 @@ export function ResultCard() {
         <div className="space-y-8 w-full border-b pb-10">
             <Carousel className="max-w-lg mx-auto">
                 <CarouselContent>
-                    {downloads.map((url, index) => (
+                    {downloads.map((url: string, index: number) => (
                         <CarouselItem key={index} className="flex justify-center">
                             <Image
                                 src={isSlideshow ? url : thumbnail}

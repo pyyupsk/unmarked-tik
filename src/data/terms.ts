@@ -1,4 +1,4 @@
-interface Term {
+export interface Term {
     title: string;
     description: string;
     list?: string[];

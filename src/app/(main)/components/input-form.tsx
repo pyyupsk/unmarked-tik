@@ -10,20 +10,36 @@ import { cn } from '@/lib/utils';
 import { LoaderCircle, X } from 'lucide-react';
 import { useState } from 'react';
 
-export function InputForm() {
+/**
+ * Renders an input form for fetching TikTok video/slideshow details.
+ *
+ * @returns {React.ReactElement} The rendered input form.
+ */
+export function InputForm(): React.ReactElement {
     const { toast } = useToast();
 
-    const [inputUrl, setInputUrl] = useState('');
+    const [inputUrl, setInputUrl] = useState<string>('');
     const { isLoading, setIsLoading } = useLoading();
     const { setDetails } = useDetails();
 
     const isSubmitDisabled = isLoading || inputUrl === '';
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    /**
+     * Handles the change event of the input field.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} event - The change event.
+     */
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setInputUrl(event.target.value);
     };
 
-    const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    /**
+     * Handles the submit event of the form.
+     *
+     * @param {React.MouseEvent<HTMLButtonElement>} event - The submit event.
+     * @returns {Promise<void>} A promise that resolves when the form is submitted.
+     */
+    const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
         event.preventDefault();
         setIsLoading(true);
 

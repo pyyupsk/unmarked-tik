@@ -26,14 +26,22 @@ interface Author {
 
 const API_URL = 'https://www.tikwm.com';
 
+/**
+ * Fetches details about a TikTok video or slideshow.
+ *
+ * @param {string} url - The URL of the TikTok video or slideshow.
+ * @param {string} agent - The user agent string used for the request.
+ * @returns {Promise<Details>} A promise that resolves with the details of the TikTok video or slideshow.
+ * @throws {Error} If the request fails or the response is not successful.
+ */
 export const fetchDetails = async (url: string, agent: string): Promise<Details> => {
     try {
-        const headers = new Headers({
+        const headers: Record<string, string> = {
             accept: 'application/json, text/javascript, */*; q=0.01',
             'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'sec-ch-ua': '"Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"',
             'user-agent': agent,
-        });
+        };
 
         const requestBody = new URLSearchParams({
             url,
@@ -49,7 +57,7 @@ export const fetchDetails = async (url: string, agent: string): Promise<Details>
             body: requestBody,
         });
 
-        const data = (await response.json()) as Response;
+        const data: Response = await response.json();
 
         if (data.code !== 0) {
             throw new Error(data.msg);
@@ -57,10 +65,10 @@ export const fetchDetails = async (url: string, agent: string): Promise<Details>
 
         const { title, cover, author: dataAuthor, hdplay, size, images } = data.data;
 
-        const isVideo = size;
-        const type = isVideo ? 'video' : 'slideshow';
+        const isVideo = Boolean(size);
+        const type: 'video' | 'slideshow' = isVideo ? 'video' : 'slideshow';
         const thumbnail = `${API_URL}${cover}`;
-        const author = {
+        const author: Author = {
             ...dataAuthor,
             avatar: `${API_URL}${dataAuthor.avatar}`,
         };
